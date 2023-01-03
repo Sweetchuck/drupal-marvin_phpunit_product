@@ -1,0 +1,5 @@
+type: 'module'
+package: 'Dummy'
+name: 'Dummy Module 01'
+description: 'Dummy description'
+core_version_requirement: '^9'
