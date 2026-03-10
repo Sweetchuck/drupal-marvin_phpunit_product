@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Drush\Commands\marvin_phpunit_product;
 
 use Drupal\marvin\CommandEvent as BaseCommandEvent;
+use Drupal\marvin\ContainerInitializer;
 use Drupal\marvin\Test\CommandEvent as TestCommandEvent;
 use Drupal\marvin\MarvinTaskDefinitionCommandTrait;
 use Drupal\marvin\Utils;
@@ -51,6 +52,15 @@ class MarvinTestPhpunitCommand extends Command implements BuilderAwareInterface 
   use MarvinTaskDefinitionCommandTrait;
 
   public const string NAME = 'marvin:test:phpunit';
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    ContainerInitializer::initialize($container);
+
+    return self::autowireCreate($container);
+  }
 
   public function __construct(
     #[Autowire(Filesystem::class)]
